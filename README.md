@@ -1,9 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
-  * [`1`, `1.6`, `1.6.4`, `latest`](https://github.com/wernight/docker-kubectl/blob/master/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/kubectl.svg)](https://microbadger.com/images/wernight/kubectl "Get your own image badge on microbadger.com")
-  * [`1`, `1.5`, `1.5.3`](https://github.com/wernight/docker-kubectl/blob/master/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/kubectl:1.5.3.svg)](https://microbadger.com/images/wernight/kubectl:1.5.3 "Get your own image badge on microbadger.com")
-  * [`1`, `1.3`, `1.3.6`](https://github.com/wernight/docker-kubectl/blob/v1.3.6/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/kubectl:1.3.6.svg)](https://microbadger.com/images/wernight/kubectl:1.3.6 "Get your own image badge on microbadger.com")
-  * [`1.2`, `1.2.4`](https://github.com/wernight/docker-kubectl/blob/v1.2.4/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/kubectl:1.2.4.svg)](https://microbadger.com/images/wernight/kubectl:1.2.4 "Get your own image badge on microbadger.com")
+  * [`1.9.2`, `latest`](https://github.com/lauriku/docker-kubectl/blob/master/Dockerfile)
 
 ## What is `kubectl`
 
@@ -11,9 +8,9 @@
 
 ## Usage
 
-    $ docker run --rm wernight/kubectl --help
+    $ docker run --rm lauriku/kubectl --help
 
-Note: Entrypoint is set to kubectl so do **not** type `wernight/kubectl kubectl`.
+Note: Entrypoint is set to kubectl so do **not** type `lauriku/kubectl kubectl`.
 
 ### Usage example 1
 
@@ -21,7 +18,7 @@ For example to access a local Kubernetes cluster you may run:
 
     $ docker run --rm --net=host --user $UID \
         -v ~/.kube:/config/.kube \
-        wernight/kubectl cluster-info
+        lauriku/kubectl cluster-info
 
   * `-net=host`: (optional) allows to connect to a local Kubernetes cluster.
   * `--user $UID`: (optional) by default runs as random UID `2342`, this allows to access your existing `~/.kube` if you have one. As you can note, you can run `kubectl` as any UID/GID.
@@ -33,7 +30,7 @@ Here we use the service-account, so this should work from within a Pod on your c
 
     $ docker run \
         -v /var/run/secrets/kubernetes.io/serviceaccount/:/var/run/secrets/kubernetes.io/serviceaccount/:ro \
-        wernight/kubectl \
+        lauriku/kubectl \
         -s https://kubernetes \
         --token="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
@@ -50,7 +47,7 @@ Here is a function POSIX-compatible that work for most shells:
       docker run --rm -it --user $UID:$GID \
         -v /var/run/secrets/kubernetes.io/serviceaccount:/var/run/secrets/kubernetes.io/serviceaccount:ro \
         -w /code -v "$PWD":/code:ro \
-        wernight/kubectl "$@"
+        lauriku/kubectl "$@"
     }
 
 ### Why use it
@@ -60,6 +57,3 @@ It's mostly meant to be used during continuous integration or as part of an auto
   * So that your machine (e.g. build server) doesn't need `kubectl` to be installed; only Docker.
   * To avoid `kubectl config use-context` and similar to affect your build and other projects' builds.
 
-## Feedbacks
-
-Suggestions are welcome on our [GitHub issue tracker](https://github.com/wernight/docker-kubectl/issues).
