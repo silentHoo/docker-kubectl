@@ -10,7 +10,7 @@ ADD https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION
 ENV HOME=/config
 
 RUN set -x && \
-    apk add --no-cache curl ca-certificates gettext && \
+    apk add --no-cache curl ca-certificates gettext coreutils bash git && \
     chmod +x /usr/local/bin/kubectl && \
     \
     # Create non-root user (with a randomly chosen UID/GUI).
