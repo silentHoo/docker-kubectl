@@ -1,10 +1,8 @@
 FROM alpine:3.6
 
-ENV KUBECTL_VERSION 1.9.2
+ENV KUBECTL_VERSION 1.9.4
 
-# Install kubectl
-# Note: Latest version may be found on:
-# https://aur.archlinux.org/packages/kubectl-bin/
+# Latest stable version: https://storage.googleapis.com/kubernetes-release/release/stable.txt
 ADD https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 ENV HOME=/config
